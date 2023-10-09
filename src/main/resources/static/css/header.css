@@ -1,0 +1,12 @@
+#userInfo {
+    margin-top: 50px;
+    height: 100px;
+    background-color: #EBEEFC;
+    border: solid 1px #EBEEFC;
+    border-radius: 10px;
+}
+
+.userThing {
+    text-decoration: none;
+    color: #334394;
+}

@@ -1,0 +1,130 @@
+#content {
+    background-color: #fcfcfc;
+}
+
+#content p {
+    line-height : 100%;
+    text-align : center;
+    margin : 0;
+}
+
+#content #real_content {
+    width : 1140px;
+    height : 570px;
+    margin : 0 auto;
+    box-sizing : border-box;
+}
+
+#content #title {
+    height : 60px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+}
+
+#content #title p {
+    font-size : 40px;
+}
+
+#content #board {
+    margin-bottom : 10px;
+}
+
+#content #board #column {
+    border : 1px solid;
+    width : 1120px;
+    background-color: #EBEEFC;
+    display : flex;
+    justify-content : space-between;
+}
+
+#content #board #column div {
+    height : 40px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+}
+
+#content #board #column div:last-child {
+    border-right : none;
+}
+
+#content #board #column #col_num {
+    width : 70px;
+    border-right: 1px solid lightgray;
+}
+
+#content #board #column #col_title {
+    width : 550px;
+    border-right: 1px solid lightgray;
+}
+
+#content #board #column #col_id {
+    width : 300px;
+    border-right: 1px solid lightgray;
+}
+
+#content #board #column #col_date {
+    width : 200px;
+}
+
+#content #board #row {
+    border-left : 1px solid;
+    border-right : 1px solid;
+    width : 1120px;
+    display : flex;
+    justify-content : space-between;
+}
+
+#content #board #row div {
+    border-bottom: 1px solid black;
+    height : 40px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+}
+
+#content #board #row div:last-child {
+    border-right : none;
+}
+
+#content #board #row #row_num {
+    width : 70px;
+    border-right: 1px solid lightgray;
+}
+
+#content #board #row #row_title {
+    width : 550px;
+    justify-content : left;
+    padding : 4px 0 4px 15px;
+    border-right: 1px solid lightgray;
+}
+
+#content #board #row #row_id {
+    width : 300px;
+    border-right: 1px solid lightgray;
+}
+
+#content #board #row #row_date {
+    width : 200px;
+}
+
+#content #paging_container {
+    height : 40px;
+    display : flex;
+    justify-content : space-between;
+}
+
+#content #paging_container div{
+    width : 300px;
+}
+
+#content #paging_container #pc_page_cont {
+    display : flex;
+    justify-content : space-between;
+}
+
+#content #paging_container #pc_mon_cont {
+    display : flex;
+    justify-content : end;
+}

@@ -1,0 +1,74 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#navbar {
+    position: fixed;
+}
+
+#header {
+    position: absolute;
+    left : 500px;
+    justify-content: center;
+}
+
+
+#content {
+    position: absolute;
+    top : 180px;
+    left :300px;
+    justify-content: center;
+}
+
+#signup{
+    position: absolute;
+    top : 280px;
+    left : 32%;
+    width : 800px;
+}
+
+#checkout1{
+    position: absolute;
+    top : 280px;
+    left : 25%;
+    width : 1200px;
+}
+
+#mypage{
+    position: absolute;
+    top : 280px;
+    left : 26%;
+    width : 1200px;
+}
+
+#shoplist, #shopdetail{
+    position: absolute;
+    top : 180px;
+    left : 24%;
+    width : 1200px;
+}
+
+#cart{
+    position: absolute;
+    top : 250px;
+    left : 26%;
+    width : 1200px;
+}
+
+.zbtn {
+    width: 25%; 
+    display:inline-block;
+}
+
+a {
+    text-decoration: none;
+    color : black;
+}
+
+#ma, #pl {
+    cursor:pointer;
+}
+
+#gaesu{
+    background-color: white;
+}
