@@ -156,7 +156,7 @@
                             <div class="mx-5 mt-4 d-flex">
                                 <img src="/img/heart.png" alt="like" style="margin-left: 23px; width:50px;" class="border rounded p-2" onClick="heart(<%= product.getProductnum() %>,'<%=loginID%>')">
                                 <button class="form-control" style="display: inline; margin-left:12px; width:164px" onclick="cartdetail(<%=product.getProductnum()%>,'<%=loginID%>',$('#product_option').val(),$('#gaesu').text())">장바구니</button>
-                                <button class="form-control" style="display: inline; margin-left:12px; width:164px">구매하기</button>
+                                <button class="form-control" style="display: inline; margin-left:12px; width:164px"><a onclick="gumaeDetail(<%=product.getProductnum()%>,$('#product_option').val(),$('#gaesu').text())">구매하기</a></button>
                             </div>
                         </div>
                     </div>

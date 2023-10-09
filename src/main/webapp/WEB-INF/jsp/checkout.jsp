@@ -1,5 +1,10 @@
+<%@ page import="MoraeTdat.data.Entity.User" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="MoraeTdat.data.Entity.Product" %>
+<%@ page import="MoraeTdat.data.Entity.Cart" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+         pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -27,6 +32,7 @@
     <link rel="stylesheet" type="text/css" href="/css/whole.css">
     <!-- 홈 css -->
     <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <script type="text/javascript" src="/js/checkout.js"></script>
 </head>
 <body>
 <script type="text/javascript">
@@ -126,24 +132,28 @@
             <div class="px-5">
                 <!-- 주문자 정보 -->
                 <div class="border rounded px-5 py-2" style="background-color: white;">
+                    <%
+                        String loginID = (String)session.getAttribute("loginID");
+                    %>
                     <div class="mt-3 mb-3 d-flex">
                         <h4 class="text-center mb-0">주문자 정보</h4>
-                        <input type="checkbox" name="orderinfo" id="orderinfo" class="ms-5 me-2">계정정보 불러오기
+                        <input type="hidden" id="sessionID" value="<%=loginID%>">
+                        <input type="checkbox" name="orderinfo" id="jumunjainfo" class="ms-5 me-2">계정정보 불러오기
                     </div>
                     <!-- 이름 -->
                     <div class="input-group mb-3">
                         <span class="input-group-text" name="id" id="id"><img src="/img/userbk.png" style="width: 25px;"></span>
-                        <input type="text" class="form-control" placeholder="  이름" aria-label="name" aria-describedby="basic-addon1">
+                        <input type="text" id="jumunjaname" class="form-control" placeholder="  이름" aria-label="name" aria-describedby="basic-addon1">
                     </div>
                     <!-- 연락처 -->
                     <div class="input-group mb-3">
                         <span class="input-group-text" name="phoneNumber" id="phoneNumber"><img src="/img/phone.png" style="width: 25px;"></span>
-                        <input type="text" class="form-control" placeholder="  연락처" aria-label="phoneNumber" aria-describedby="basic-addon1">
+                        <input type="text" id="jumunjanumber" class="form-control" placeholder="  연락처" aria-label="phoneNumber" aria-describedby="basic-addon1">
                     </div>
                     <!-- 이메일 -->
                     <div class="input-group mb-3">
                         <span class="input-group-text" name="email" id="email"><img src="/img/email.png" style="width: 25px;"></span>
-                        <input type="text" class="form-control" placeholder="  이메일" aria-label="email" aria-describedby="basic-addon1">
+                        <input type="text" id="jumunjaemail" class="form-control" placeholder="  이메일" aria-label="email" aria-describedby="basic-addon1">
                     </div>
                 </div>
                 <!-- 주문자 정보 끝 -->
@@ -156,13 +166,13 @@
                     </div>
                     <!-- 이름 -->
                     <div class="input-group mb-3">
-                        <span class="input-group-text" name="id" id="id"><img src="/img/userbk.png" style="width: 25px;"></span>
-                        <input type="text" class="form-control" placeholder="  이름" aria-label="name" aria-describedby="basic-addon1">
+                        <span class="input-group-text" name="id"><img src="/img/userbk.png" style="width: 25px;"></span>
+                        <input type="text" id="ordername" class="form-control" placeholder="  이름" aria-label="name" aria-describedby="basic-addon1">
                     </div>
                     <!-- 연락처 -->
                     <div class="input-group mb-3">
-                        <span class="input-group-text" name="phoneNumber" id="phoneNumber"><img src="/img/phone.png" style="width: 25px;"></span>
-                        <input type="text" class="form-control" placeholder="  연락처" aria-label="phoneNumber" aria-describedby="basic-addon1">
+                        <span class="input-group-text" name="phoneNumber"><img src="/img/phone.png" style="width: 25px;"></span>
+                        <input type="text" id="ordernumber" class="form-control" placeholder="  연락처" aria-label="phoneNumber" aria-describedby="basic-addon1">
                     </div>
                     <!-- 우편번호 -->
                     <div class="container mb-5" style="padding:0;">
@@ -178,25 +188,51 @@
                     </div>
                 </div>
                 <!-- 배송 정보 끝 -->
+                <%
+                    String gubun = (String)request.getAttribute("gubun");
+                    int ordernum = (int)request.getAttribute("ordernum");
+                    LocalDate date = LocalDate.now();
+                    if(gubun.equals("detail")){
+                        Product product = (Product)request.getAttribute("Product");
 
-                <!-- 주문내역 -->
-                <div style="width: 1100px;" class="mt-5 mb-5">
-                    <div class="border py-3 rounded" style="background-color: white;">
-                        <p style="margin-left: 15px;" class="mb-2">주문번호 21414&nbsp;&nbsp;&nbsp;주문날짜 2023-09-17</p>
-                        <div class="d-flex mt-3">
-                            <input type="checkbox" name="historyCheck" id="historyCheck" style="margin: 0 30px;">
-                            <img src="/img/sale_item.png" alt="product_img" style="width: 180px;">
-                            <div class="border d-flex" style="margin-left: 30px; width: 720px;">
-                                <p>제품명</p>
-                                <p>수량,옵션</p>
-                                <p>가격</p>
+                        String option = (String)request.getAttribute("option");
+                        String quantity = (String)request.getAttribute("quantity");
+                %>
+                    <div style="width: 1100px;" class="mt-5 mb-5">
+                        <div class="border py-3 rounded" style="background-color: white;">
+                            <p style="margin-left: 15px;" class="mb-2">주문번호 <%=ordernum%>&nbsp;&nbsp;&nbsp;주문날짜 <%=date%></p>
+                            <div class="d-flex mt-3">
+                                <img src="<%=product.getMainphoto()%>" alt="product_img" style="width: 180px; margin-left: 30px">
+                                <div class="border p-3" style="margin-left: 30px; width: 720px;">
+                                    <p class="fs-5 fw-bold"><%=product.getProductname()%></p>
+                                    <p>&nbsp;수량 : <%=quantity%>&nbsp;&nbsp;|&nbsp;&nbsp;옵션 : <%=option%></p>
+                                    <p class="fw-bold">&nbsp;<%=product.getProductprice()%>원</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center mt-2">
-                            <p style="margin-top: 20px; margin-bottom: 5px;">더보기</p>
+                    </div>
+                <%
+                    } else if(gubun.equals("cart")){
+                        List<Cart> cartList = (List<Cart>)request.getAttribute("cartList");
+                        for(Cart cart : cartList){
+                %>
+                    <div style="width: 1100px;" class="mt-5 mb-5">
+                        <div class="border py-3 rounded" style="background-color: white;">
+                            <p style="margin-left: 15px;" class="mb-2">주문번호 <%=ordernum%>&nbsp;&nbsp;&nbsp;주문날짜 <%=date%></p>
+                            <div class="d-flex mt-3">
+                                <img src="<%=cart.getMainphoto()%>" alt="product_img" style="width: 180px; margin-left: 30px">
+                                <div class="border p-3" style="margin-left: 30px; width: 720px;">
+                                    <p><%=cart.getProductname()%></p>
+                                    <p>&nbsp;수량 : <%=cart.getAmount()%> &nbsp;&nbsp;|&nbsp;&nbsp;옵션 : <%=cart.getProductoption()%></p>
+                                    <p class="fw-bold">&nbsp;<%=cart.getProductprice()%>원</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>            
+                <%
+                        }
+                    }
+                %>
                 <!-- 주문내역 끝 -->
 
                 <!-- 결제 수단 선택 -->
@@ -216,35 +252,6 @@
                 <!-- 결제 수단 선택 끝 -->
             </div>
         </form>
-    </div>    
-    <!-- Footer -->
-    <div class="footer" style="position: absolute; top : 2000px; left :335px;">
-        <hr>
-        <div class="container d-flex align-items-center mt-5">
-            <div class="col">
-                <img src="/img/logo.png" alt="Logo" class="img-fluid">
-            </div>
-            <div class="col">
-                <div class="container text-start ms-5">
-                    <p>&copy; 모래모레 All rights reserved.<br>
-                        주소 : 경남 남해군 상주면 상주로 17-4 벤치오피스 2층<br>
-                        대표 : 강소희 &nbsp;&nbsp;| &nbsp;&nbsp;사업자등록번호 : 2021-1009<br>
-                        제휴협력문의 : raysonkingdom@gmail.com
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="container text-start ms-5" >
-                    <p><b>고객센터</b><br><br>
-                        전화번호 : 055-2021-1009<br>
-                        주말, 공휴일은 모래 복지를 위해 운영하지 않습니다.<br>
-                        <img src="/img/kakao-talk.png" class="img-fluid" style="width: 20px; margin-right:5px;">카카오채널 : MoraeTDAT
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="mb-5">
-        </div>
     </div>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://spay.kcp.co.kr/plugin/kcp_spay_hub.js"></script>
@@ -266,7 +273,7 @@
 
         function checkout(){
             alert("결제가 완료되었습니다.");
-            location.href("/home");
+            window.location.href='/MoraeTDAT/checkout/finish';
         }
     </script>
 </body>

@@ -133,13 +133,12 @@
                         <%
                             List<Cart> cartlist = (ArrayList<Cart>)request.getAttribute("cartlist");
                             int total_price = 0;
-
                             for(Cart cart : cartlist){
                         %>
                         <!-- 상품 하나 -->
                             <div class="d-flex mt-5">
                                 <p style="display: none" class="productnum"><%=cart.getProductnum()%></p>
-                                <input type="checkbox" name="historyCheck" class="historyCheck"  style="margin: 0 30px;">
+                                <input type="checkbox" id="productCheck" class="productCheck"  style="margin: 0 30px;">
                                 <img src="<%=cart.getMainphoto()%>" alt="product_img" style="width: 180px;">
                                 <div class="border p-4 mx-auto" style="margin-left: 30px; width: 720px;">
                                     <p class="h3 fw-bold"><%=cart.getProductname()%></p>
@@ -174,7 +173,7 @@
 
                     <!-- 구매버튼 -->
                     <div class="mt-5 d-flex justify-content-center">
-                        <button type="button" class="btn btn-lg border rounded" style="width:300px; height: 50px;background-color: #EEEEEE;">구매하기</button>
+                        <button type="button" class="btn btn-lg border rounded" style="width:300px; height: 50px;background-color: #EEEEEE;" onclick="cartGumae()">구매하기</button>
                     </div>
                     <!-- 구매버튼 끝 -->
                 </div>

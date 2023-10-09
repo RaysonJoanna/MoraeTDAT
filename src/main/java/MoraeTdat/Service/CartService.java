@@ -33,4 +33,5 @@ public class CartService {
         cartRepository.deletePart(number, userid);
     }
 
+    public Cart getCartListBynums(int productnum, String userid){ return cartRepository.getCartListBynums(productnum,userid);}
 }

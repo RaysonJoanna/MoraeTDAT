@@ -180,3 +180,20 @@ function orderlowprice(c){
 
     window.location.href = '/MoraeTDAT/shop/order?category='+c+'&gijun='+gijun;
 }
+
+function cartGumae(){
+    let data = [];
+    $('.productCheck:checked').each(function() {
+        const productNum = $(this).siblings('.productnum').text();
+        data.push(productNum);
+    });
+
+    let productnums = data.join(',');
+
+    window.location.href = '/MoraeTDAT/checkout?gubun=cart&num='+productnums+'&option=none&quantity=none';
+}
+
+function gumaeDetail(productnum, option, quantity){
+
+    window.location.href='/MoraeTDAT/checkout?gubun=detail&num='+productnum+'&option='+option+'&quantity='+quantity;
+}

@@ -24,4 +24,7 @@ public interface CartRepository extends JpaRepository<Cart,Integer> {
     @Query(value = "DELETE FROM cart WHERE productnum =? and userid=?", nativeQuery = true)
     void deletePart(int number, String userid);
 
+    @Query(value="SELECT * from cart where productnum=? and userid=?", nativeQuery = true)
+    Cart getCartListBynums(int productnum, String userid);
+
 }

@@ -131,7 +131,7 @@ public class ShopController {
 
     @RequestMapping(value="/shopdetail", method= RequestMethod.GET)
     public ModelAndView shopdetail(ModelAndView mav,
-                                       @RequestParam String productnum) {
+                                   @RequestParam String productnum) {
         Product product = new Product();
         product = shopService.getProductBynum(Integer.parseInt(productnum));
 
