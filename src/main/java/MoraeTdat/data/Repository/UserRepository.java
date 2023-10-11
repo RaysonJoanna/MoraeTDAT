@@ -30,4 +30,21 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query(value = "Select * from user where useremail=? and userphone=?", nativeQuery = true)
     User findUserByEmailPhone(String email, String phone);
+
+    @Transactional
+    @Modifying
+    @Query(value="update user set userpw=? where userid=?;",nativeQuery = true)
+    void updatePw(String pw,String userid);
+
+    @Transactional
+    @Modifying
+    @Query(value="update user set userphone=? where userid=?;",nativeQuery = true)
+    void updatePhone(String phone,String userid);
+
+    @Transactional
+    @Modifying
+    @Query(value="update user set useremail=? where userid=?;",nativeQuery = true)
+    void updateEmail(String email,String userid);
+
+
 }

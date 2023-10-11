@@ -98,11 +98,29 @@
             <div class="col-1">
                 <!-- 위치 차지 -->
             </div>
+            <%
+                String userid = (String) session.getAttribute("loginID");
+            %>
             <div class="col-2 mb-4 p-0" id="userInfo">
+                <%
+                    if(userid==null) {
+                %>
                 <div class="mt-4 d-flex justify-content-center">
                     <img src="/img/user.png" alt="userInfo" height="30px" width="30px">
                     <p style="margin-left: 5px;" id="showUserId">비회원</p>
                 </div>
+                <%
+                } else {
+                %>
+                <a href="/MoraeTDAT/mypage?userid=<%=userid%>">
+                    <div class="mt-4 d-flex justify-content-center">
+                        <img src="/img/user.png" alt="userInfo" height="30px" width="30px">
+                        <p style="margin-left: 5px;" id="showUserId">비회원</p>
+                    </div>
+                </a>
+                <%
+                    }
+                %>
                 <div>
                     <div class="d-flex  justify-content-center">
                         <a class="userThing" href="/MoraeTDAT/login" id="login"><p>로그인</p></a>
@@ -146,12 +164,12 @@
                                         <p class="fs-6 ms-2" style="color:gray">수량 : <%=cart.getAmount()%></p>
                                         <p class="fs-6 ms-4" style="color:gray">옵션 : <%=cart.getProductoption()%></p>
                                     </div>
-                                    <p class="h5 ms-2"><%=cart.getProductprice()%></p>
+                                    <p class="h5 ms-2"><%=cart.getProductprice()%>원</p>
                                 </div>
                             </div>
                             <!-- 상품 하나 끝 -->
                            <%
-                                   total_price += cart.getProductprice();
+                                   total_price += cart.getProductprice()*cart.getAmount();
                                }
                            %>
                     <!-- 금액 표시창 -->
@@ -162,12 +180,19 @@
                             delivery_fee = 3000;
                         }
                     %>
-                    <div class="border py-5 mt-5 d-flex m-5" style="background-color: white;">
-                        <p class="fs-2 fw-bold my-auto" style="margin-left: 60px;">전체 금액</p>
-                        <p class="fs-4 my-auto" style="margin-left: 60px;"><%=total_price%></p>
-                        <p class="fs-4 my-auto" style="margin-left: 40px;">&nbsp;+&nbsp;</p>
-                        <p class="fs-4 my-auto" style="margin-left: 40px;"><%=delivery_fee%></p>
-                        <p class="fs-2 fw-bold my-auto" style="margin-left: 120px;"><%=total_price + delivery_fee%>원</p>
+                    <div>
+                        <p class="h6 mt-5 ms-5" style="color: gray">* 5 만원 이상 구매시 무료배송</p>
+                        <div class="border py-5 mb-5 ms-5 me-5 d-flex" style="background-color: white;">
+                            <p class="fs-2 fw-bold my-auto" style="margin-left: 60px;">전체 금액</p>
+                            <p class="fs-4 my-auto" style="margin-left: 60px;"><%=total_price%></p>
+                            <p class="fs-4 my-auto" style="margin-left: 40px;">&nbsp;+&nbsp;</p>
+                            <div class="d-flex">
+                                <p class="fs-4 my-auto" style="margin-left: 40px;"><%=delivery_fee%></p>
+                                <p class="fs-6 my-auto">(배송비)</p>
+                            </div>
+                            <p class="fs-2 fw-bold my-auto" style="margin-left: 80px;">=&nbsp;&nbsp;&nbsp;<%=total_price + delivery_fee%>원</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- 금액 표시창 끝 -->
 

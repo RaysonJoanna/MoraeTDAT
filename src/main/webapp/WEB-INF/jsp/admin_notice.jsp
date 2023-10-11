@@ -1,5 +1,7 @@
+<%@ page import="MoraeTdat.data.Entity.Notice" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+         pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -43,22 +45,29 @@ pageEncoding="utf-8"%>
                         <p>게시일</p>
                     </div>
                 </div>
-                <!-- 문의사항 게시글 출력 -->
+                <%
+                    List<Notice> noticeList = (List<Notice>) request.getAttribute("noticelist");
+                    for(Notice notice : noticeList){
+                %>
                 <div id="row">
                     <div id="row_num">
-                        <p>1</p>
+                        <p><%=notice.getNoticenum()%></p>
                     </div>
-                    <div id="row_title">
-                        <p>제목</p>
-                    </div>
+                    <a href="/MoraeTDAT/admin/notice/view?noticenum=<%=notice.getNoticenum()%>">
+                        <div id="row_title">
+                            <p><%=notice.getTitle()%></p>
+                        </div>
+                    </a>
                     <div id="row_id">
-                        <p>아이디</p>
+                        <p>관리자</p>
                     </div>
                     <div id="row_date">
-                        <p>게시일</p>
+                        <p><%=notice.getRegidate()%></p>
                     </div>
                 </div>
-                                <!-- 문의사항 게시글 출력 -->
+            <%
+                }
+            %>
             </div>
             <div id="paging_container" class="mt-5">
                 <div id="pc_sear_cont">
@@ -70,7 +79,7 @@ pageEncoding="utf-8"%>
                     <button>&gt;</button>
                 </div>
                 <div>
-                    <button>공지사항 작성</button>
+                    <button onclick="window.location.href='/MoraeTDAT/admin/notice/write'">공지사항 작성</button>
                 </div>
             </div>
         </div>

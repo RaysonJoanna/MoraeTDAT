@@ -65,7 +65,7 @@ public class ShopController {
         int productnum = (int)cart.get("productnum");
 
         //등록한 적 있는 물건
-        if(shopService.isExistsProduct(productnum)>0){
+        if(shopService.isExistsProduct(productnum,userid)>0){
             String isdetail = (String)cart.get("isdetail");
 
             //상품 상세화면에서 장바구니에 담았을 때

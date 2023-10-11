@@ -1,5 +1,7 @@
+<%@ page import="MoraeTdat.data.Entity.Inquiry" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+         pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,13 +15,15 @@ pageEncoding="utf-8"%>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/board.css">
     <title>MoraeTDAT</title>
 </head>
 <body>
     <div id="" class="">
         <div class="d-flex justify-content-center">
-            <img src="/img/logo.png" alt="logo" style="width: 70%; max-width: 700px;">
+            <img src="/img/logo.png" alt="logo" style="width: 70%; max-width: 700px;cursor:pointer" onclick="window.location.href='/MoraeTDAT/admin/login-process'">
         </div>
     </div>
     <!-- 컨텐츠 -->
@@ -43,22 +47,39 @@ pageEncoding="utf-8"%>
                         <p>게시일</p>
                     </div>
                 </div>
-                <!-- 문의사항 게시글 출력 -->
+<%
+    List<Inquiry> inquiryList = (List<Inquiry>)request.getAttribute("inquirylist");
+
+    for(Inquiry inquiry : inquiryList){
+%>
+
                 <div id="row">
                     <div id="row_num">
-                        <p>1</p>
+                        <p class="num"><%=inquiry.getInquirynum()%></p>
                     </div>
-                    <div id="row_title">
-                        <p>제목</p>
-                    </div>
+                    <a href="/MoraeTDAT/admin/inquiry/view?inquirynum=<%=inquiry.getInquirynum()%>">
+                        <div id="row_title">
+                            <p><%=inquiry.getTitle()%></p>
+                            <%
+                                if(!(inquiry.getAnswercontent().equals(""))){
+                            %>
+                            <p class="btn btn-success btn-sm ms-2 replied">답변완료</p>
+                            <%
+                                }
+                            %>
+                        </div>
+                    </a>
                     <div id="row_id">
-                        <p>아이디</p>
+                        <p><%=inquiry.getUserid()%></p>
                     </div>
                     <div id="row_date">
-                        <p>게시일</p>
+                        <p><%=inquiry.getRegidate()%></p>
                     </div>
                 </div>
-                                <!-- 문의사항 게시글 출력 -->
+
+<%
+    }
+%>
             </div>
             <div id="paging_container" class="mt-5">
                 <div id="pc_sear_cont">

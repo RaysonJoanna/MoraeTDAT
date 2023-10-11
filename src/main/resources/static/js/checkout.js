@@ -25,3 +25,101 @@ $(function (){
         }
     });
 });
+
+function checkout(){
+    alert("결제가 완료되었습니다.");
+
+    let gubun = [];
+    $('.gubun').each(function() {
+        gubun.push($(this).text());
+    });
+
+    if(gubun[0] == "detail"){
+        let num = [];
+        $('.dnum').each(function() {
+            num.push($(this).text());
+        });
+
+
+        let quantity = $('.dquantity').text();
+        let ordername  = $('#jumunjaname').val();
+        let orderphone  = $('#jumunjanumber').val();
+        let orderemail  = $('#jumunjaemail').val();
+        let deliverphone = $('#ordernumber').val();
+        let deliverzcode  = $('#zonecode').val();
+        let deliveraddr  = $('#address').val()+" "+$('#detailAddress').val();
+        let delivername  = $('#ordername').val();
+
+        let checkoutData = JSON.stringify({
+            "gubun":gubun,
+            "num":num,
+            "ordername":ordername,
+            "orderphone":orderphone,
+            "orderemail":orderemail,
+            "deliverphone":deliverphone,
+            "deliverzcode":deliverzcode,
+            "deliveraddr":deliveraddr,
+            "delivername":delivername,
+            "quantity":quantity
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '/MoraeTDAT/checkout/finish',
+            async: true,
+            dataType: 'JSON',
+            contentType: "application/json; charset=UTF-8",
+            data: checkoutData,
+            success: function (data) {
+                if (data.checkoutSuccess) {
+                    window.location.href = '/MoraeTDAT/home';
+                }
+            }
+        });
+    } else if(gubun[0] == "cart"){
+        let num = [];
+        $('.cnum').each(function() {
+            num.push($(this).text());
+        });
+
+        let quantity = [];
+        $('.cquantity').each(function() {
+            quantity.push($(this).text());
+        });
+
+        let ordername  = $('#jumunjaname').val();
+        let orderphone  = $('#jumunjanumber').val();
+        let orderemail  = $('#jumunjaemail').val();
+        let deliverphone = $('#ordernumber').val();
+        let deliverzcode  = $('#zonecode').val();
+        let deliveraddr  = $('#address').val()+" "+$('#detailAddress').val();
+        let delivername  = $('#ordername').val();
+
+        let checkoutData = JSON.stringify({
+            "gubun":gubun,
+            "num":num,
+            "ordername":ordername,
+            "orderphone":orderphone,
+            "orderemail":orderemail,
+            "deliverphone":deliverphone,
+            "deliverzcode":deliverzcode,
+            "deliveraddr":deliveraddr,
+            "delivername":delivername,
+            "quantity":quantity
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '/MoraeTDAT/checkout/finish',
+            async: true,
+            dataType: 'JSON',
+            contentType: "application/json; charset=UTF-8",
+            data: checkoutData,
+            success: function (data) {
+                if(data.checkoutSuccess){
+                    window.location.href = '/MoraeTDAT/home';
+                }
+            }
+        });
+    }
+}

@@ -100,11 +100,29 @@
             <div class="col-9 d-flex justify-content-center">
                 <a href="/MoraeTDAT/home"><img src="/img/logo.png" alt="logo" class="mx-auto img-fluid"></a>
             </div>
+            <%
+                String userid = (String) session.getAttribute("loginID");
+            %>
             <div class="col-2 mb-4 p-0" id="userInfo">
+                <%
+                    if(userid==null) {
+                %>
                 <div class="mt-4 d-flex justify-content-center">
                     <img src="/img/user.png" alt="userInfo" height="30px" width="30px">
                     <p style="margin-left: 5px;" id="showUserId">비회원</p>
                 </div>
+                <%
+                } else {
+                %>
+                <a href="/MoraeTDAT/mypage?userid=<%=userid%>">
+                    <div class="mt-4 d-flex justify-content-center">
+                        <img src="/img/user.png" alt="userInfo" height="30px" width="30px">
+                        <p style="margin-left: 5px;" id="showUserId">비회원</p>
+                    </div>
+                </a>
+                <%
+                    }
+                %>
                 <div>
                     <div class="d-flex  justify-content-center">
                         <a class="userThing" href="/MoraeTDAT/login" id="login"><p>로그인</p></a>

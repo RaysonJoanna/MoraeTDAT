@@ -91,11 +91,29 @@
         <div class="col-8">
             <a href="/MoraeTDAT/home"><img src="/img/logo.png" alt="logo" class="mx-auto img-fluid"></a>
         </div>
+        <%
+            String userid = (String) session.getAttribute("loginID");
+        %>
         <div class="col-2 mb-4 p-0" id="userInfo">
+            <%
+                if(userid==null) {
+            %>
             <div class="mt-4 d-flex justify-content-center">
                 <img src="/img/user.png" alt="userInfo" height="30px" width="30px">
                 <p style="margin-left: 5px;" id="showUserId">비회원</p>
             </div>
+            <%
+            } else {
+            %>
+            <a href="/MoraeTDAT/mypage?userid=<%=userid%>">
+                <div class="mt-4 d-flex justify-content-center">
+                    <img src="/img/user.png" alt="userInfo" height="30px" width="30px">
+                    <p style="margin-left: 5px;" id="showUserId">비회원</p>
+                </div>
+            </a>
+            <%
+                }
+            %>
             <div>
                 <div class="d-flex  justify-content-center">
                     <a class="userThing" href="/MoraeTDAT/login" id="login"><p>로그인</p></a>
@@ -127,5 +145,29 @@
                     max-width: 1300px;background-color: white;" class="mt-1 p-5 text-start mb-3"><%=inquiry.getContent()%></p>
             </div>
         </div>
+<%
+    if(!(inquiry.getAnswercontent().equals(""))){
+        String content = inquiry.getAnswercontent();
+%>
+        <hr>
+        <div class="row">
+            <div class="col d-flex p-3">
+                <p class="fs-5 ms-5 me-5 my-auto">관리자</p>
+                <p class="my-auto"><%=inquiry.getInquirynum()%>번 문의 답변입니다.</p>
+            </div>
+        </div>
+            <div class="row">
+            <div class="col p-3 d-flex justify-content-center" style="width:90%;">
+                <div class="col p-3 d-flex justify-content-center" style="width:90%;">
+                    <p  style="border: 1px solid #e2e2e2; width:90%;
+                            max-width: 1300px;background-color: white;" class="mt-1 p-5 text-start mb-3"><%=content%></p>
+                </div>
+            </div>
+        </div>
+<%
+    }
+%>
     </div>
 </div>
+</body>
+</html>

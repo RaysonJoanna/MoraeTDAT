@@ -12,16 +12,16 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Order {
+public class Orders {
 
     @Id
-    private Long productnum;
+    private int productnum;
 
     @Column(nullable = false)
-    private String productName;
+    private String productname;
 
     @Column(nullable = false)
-    private Long productprice;
+    private int productprice;
 
     private String productoption;
 
@@ -41,13 +41,17 @@ public class Order {
     private String deliveraddr;
 
     @Column(nullable = false)
-    private String delivename;
+    private String delivername;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private String ordernum;
+    private int ordernum;
 
     @Column(nullable = false)
     private Date orderdate;
 
+    @Column(nullable = false)
+    private int amount;
+
+    @Column(nullable = false)
+    private String deliverphone;
 }

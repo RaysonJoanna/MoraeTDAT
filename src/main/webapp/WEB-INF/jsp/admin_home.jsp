@@ -25,7 +25,7 @@ pageEncoding="utf-8"%>
 <body>
     <div id="" class="">
         <div class="d-flex justify-content-center">
-            <img src="/img/logo.png" alt="logo" style="width: 70%; max-width: 700px;">
+            <img src="/img/logo.png" alt="logo" style="width: 70%; max-width: 700px;cursor:pointer" onclick="window.location.href='/MoraeTDAT/admin/login-process'">
         </div>
     </div>
     <%

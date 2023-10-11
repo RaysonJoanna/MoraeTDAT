@@ -64,4 +64,9 @@ public class UserService {
         return userRepository.findUserByEmailPhone(email,phonenumber);
     }
 
+    public void updatePw(String pw,String userid){userRepository.updatePw(pw,userid);}
+
+    public void updatePhone(String phone,String userid){userRepository.updatePhone(phone,userid);}
+
+    public void updateEmail(String email,String userid){userRepository.updateEmail(email,userid);}
 }

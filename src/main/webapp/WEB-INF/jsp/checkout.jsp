@@ -103,11 +103,29 @@
             <div class="col-1">
                 <!-- 위치 차지 -->
             </div>
+            <%
+                String userid = (String) session.getAttribute("loginID");
+            %>
             <div class="col-2 mb-4 p-0" id="userInfo">
+                <%
+                    if(userid==null) {
+                %>
                 <div class="mt-4 d-flex justify-content-center">
                     <img src="/img/user.png" alt="userInfo" height="30px" width="30px">
                     <p style="margin-left: 5px;" id="showUserId">비회원</p>
                 </div>
+                <%
+                } else {
+                %>
+                <a href="/MoraeTDAT/mypage?userid=<%=userid%>">
+                    <div class="mt-4 d-flex justify-content-center">
+                        <img src="/img/user.png" alt="userInfo" height="30px" width="30px">
+                        <p style="margin-left: 5px;" id="showUserId">비회원</p>
+                    </div>
+                </a>
+                <%
+                    }
+                %>
                 <div>
                     <div class="d-flex  justify-content-center">
                         <a class="userThing" href="/MoraeTDAT/login" id="login"><p>로그인</p></a>
@@ -190,7 +208,6 @@
                 <!-- 배송 정보 끝 -->
                 <%
                     String gubun = (String)request.getAttribute("gubun");
-                    int ordernum = (int)request.getAttribute("ordernum");
                     LocalDate date = LocalDate.now();
                     if(gubun.equals("detail")){
                         Product product = (Product)request.getAttribute("Product");
@@ -200,13 +217,17 @@
                 %>
                     <div style="width: 1100px;" class="mt-5 mb-5">
                         <div class="border py-3 rounded" style="background-color: white;">
-                            <p style="margin-left: 15px;" class="mb-2">주문번호 <%=ordernum%>&nbsp;&nbsp;&nbsp;주문날짜 <%=date%></p>
+                            <p style="margin-left: 15px;" class="mb-2">주문날짜 <%=date%></p>
                             <div class="d-flex mt-3">
                                 <img src="<%=product.getMainphoto()%>" alt="product_img" style="width: 180px; margin-left: 30px">
                                 <div class="border p-3" style="margin-left: 30px; width: 720px;">
                                     <p class="fs-5 fw-bold"><%=product.getProductname()%></p>
                                     <p>&nbsp;수량 : <%=quantity%>&nbsp;&nbsp;|&nbsp;&nbsp;옵션 : <%=option%></p>
                                     <p class="fw-bold">&nbsp;<%=product.getProductprice()%>원</p>
+
+                                    <p class="dquantity" style="display: none"><%=quantity%></p>
+                                    <p class="gubun" style="display: none"><%=gubun%></p>
+                                    <p class="dnum" style="display: none"><%=product.getProductnum()%></p>
                                 </div>
                             </div>
                         </div>
@@ -218,13 +239,17 @@
                 %>
                     <div style="width: 1100px;" class="mt-5 mb-5">
                         <div class="border py-3 rounded" style="background-color: white;">
-                            <p style="margin-left: 15px;" class="mb-2">주문번호 <%=ordernum%>&nbsp;&nbsp;&nbsp;주문날짜 <%=date%></p>
+                            <p style="margin-left: 15px;" class="mb-2">&nbsp;&nbsp;&nbsp;주문날짜 <%=date%></p>
                             <div class="d-flex mt-3">
                                 <img src="<%=cart.getMainphoto()%>" alt="product_img" style="width: 180px; margin-left: 30px">
                                 <div class="border p-3" style="margin-left: 30px; width: 720px;">
                                     <p><%=cart.getProductname()%></p>
                                     <p>&nbsp;수량 : <%=cart.getAmount()%> &nbsp;&nbsp;|&nbsp;&nbsp;옵션 : <%=cart.getProductoption()%></p>
                                     <p class="fw-bold">&nbsp;<%=cart.getProductprice()%>원</p>
+
+                                    <p class="cquantity" style="display: none">''</p>
+                                    <p class="gubun" style="display: none"><%=gubun%></p>
+                                    <p class="cnum" style="display: none"><%=cart.getProductnum()%></p>
                                 </div>
                             </div>
                         </div>
@@ -269,11 +294,6 @@
                     $('#detailAddress').focus();
                 }
             }).open();
-        }
-
-        function checkout(){
-            alert("결제가 완료되었습니다.");
-            window.location.href='/MoraeTDAT/checkout/finish';
         }
     </script>
 </body>

@@ -1,5 +1,6 @@
+<%@ page import="MoraeTdat.data.Entity.Notice" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+         pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,23 +26,41 @@ pageEncoding="utf-8"%>
     <div>
         <h2 class="text-center my-5 fw-bold">공지사항</h2>
     </div>
+    <%
+        Notice notice = (Notice)request.getAttribute("notice");
+    %>
     <div class="container" id="content" style="margin-top: 50px; background-color: #fcfcfc;">
         <div class="container">
-            <form action="/MoraeTDAT/admin/notice/write-process" method="post">
+            <form action="/MoraeTDAT/admin/notice/update-process" method="post">
+            <input type="hidden" name="noticenum" value="<%=notice.getNoticenum()%>">
             <div class="row">
                 <div class="col border d-flex p-3 justify-content-center">
                     <p class="fs-5 ms-2 me-5 my-auto">제목</p>
-                    <input type="text" name="title" style="border: 1px solid #e2e2e2; width:70%;max-width: 800px;">
+                    <input type="text" name="title" style="border: 1px solid #e2e2e2; width:70%;max-width: 800px;" value="<%=notice.getTitle()%>">
                 </div>
             </div>
             <div class="row">
                 <div class="col border-start border-end p-3 d-flex justify-content-center" style="width:90%; height:570px">
-                    <input type="textarea" name="content" style="border: 1px solid #e2e2e2; width:90%;
-            max-width: 1300px; height:500px" class="mt-3">
+                    <textarea name="content" style="border: 1px solid #e2e2e2; width:90%;
+            max-width: 1300px; height:500px;resize: none" class="mt-3" value="<%=notice.getContent()%>" onkeypress="onTestChange();"></textarea>
                 </div>
             </div>
+                <script>
+                    function onTestChange() {
+                        var key = window.event.keyCode;
+
+                        // If the user has pressed enter
+                        if (key === 13) {
+                            document.getElementById("txtArea").value = document.getElementById("txtArea").value + "\n*";
+                            return false;
+                        }
+                        else {
+                            return true;
+                        }
+                    }
+                </script>
             <div class="row d-flex justify-content-center border-start border-end border-bottom pb-4">
-                <button class="btn btn-secondary col-5" type="submit">공지사항 등록</button>
+                <button class="btn btn-warning col-5" type="submit">공지사항 수정</button>
             </div>
             </form>
         </div>

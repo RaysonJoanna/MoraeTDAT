@@ -21,4 +21,10 @@ public class NoticeService {
 
     public Notice getNotice(int noticenum) { return noticeRepository.getNotice(noticenum);
     }
+
+    public void deleteByNoticenum(int noticenum) { noticeRepository.deleteByNoticenum(noticenum);}
+
+    public void createNotice(String title, String content){noticeRepository.createNotice(title, content);}
+
+    public void updateNotice(String title, String content, int noticenum){noticeRepository.updateNotice(title, content, noticenum);}
 }

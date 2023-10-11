@@ -34,4 +34,6 @@ public class CartService {
     }
 
     public Cart getCartListBynums(int productnum, String userid){ return cartRepository.getCartListBynums(productnum,userid);}
+
+    public Cart getCartBynum(int productnum){return cartRepository.getCartBynum(productnum);}
 }

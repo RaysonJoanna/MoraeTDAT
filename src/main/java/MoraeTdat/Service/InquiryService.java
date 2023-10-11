@@ -16,10 +16,18 @@ public class InquiryService {
     public InquiryService(InquiryRepository inquiryRepository) {
         this.inquiryRepository = inquiryRepository;
     }
+
     public void addInquiry(String title, String content, String userid){inquiryRepository.addInquiry(title,content,userid);};
 
     public List<Inquiry> getUserInquiries(){return inquiryRepository.getUserInquiries();}
 
     public Inquiry getInquiry(String inquirynum) { return inquiryRepository.getInquiry(inquirynum);
     }
+
+    public List<Inquiry> getAllInquiry(){return inquiryRepository.getAllInquiry();}
+
+    public void deleteByInquirynum(int inquirynum){inquiryRepository.deleteByInquirynum(inquirynum);}
+
+    public void addReply(String answercontent, int inquirynum){inquiryRepository.addReply(answercontent,inquirynum);}
+
 }

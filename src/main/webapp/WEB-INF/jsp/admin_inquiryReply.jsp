@@ -45,24 +45,7 @@ pageEncoding="utf-8"%>
                 </div>
             </div>
             <!-- 문의사항 내용 출력 -->
-            <div class="container mt-5" style="background-color: #fcfcfc;">
-                <div class="row">
-                    <div class="col border d-flex p-3">
-                        <p class="fs-5 ms-5 me-5 my-auto">제목</p>
-                        <p class="my-auto">게시글 번호 문의 답변입니다.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col border-start border-end p-3 d-flex justify-content-center" style="width:90%; height:570px">
-                        <input type="textarea" id="naeyong" style="border: 1px solid #e2e2e2; width:90%;
-                            max-width: 1300px; height:500px" class="mt-3">
-                    </div>
-                </div>
-                <div class="row d-flex justify-content-center border-start border-end border-bottom pb-4">
-                    <button class="btn btn-secondary col-5">답변 저장</button>
-                </div>
-            </div>
-        </div>
+
         <div class="mb-5">
             <p></p>
         </div>

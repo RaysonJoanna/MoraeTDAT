@@ -12,7 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Inquiry {
+public class AdminInquiry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,12 @@ public class Inquiry {
 
     @Column(nullable = false)
     private String userid;
+
+    @Column
+    private Date answerdate;
+
+    @Column
+    private String answertitle;
 
     @Column
     private String answercontent;

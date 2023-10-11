@@ -112,7 +112,7 @@ function gaesuUp(){
 
 function select_All(e){
     e.preventDefault();
-    $('.historyCheck').prop("checked",true);
+    $('.productCheck').prop("checked",true);
 }
 
 function part_delete(e){
@@ -182,6 +182,7 @@ function orderlowprice(c){
 }
 
 function cartGumae(){
+
     let data = [];
     $('.productCheck:checked').each(function() {
         const productNum = $(this).siblings('.productnum').text();
@@ -190,7 +191,11 @@ function cartGumae(){
 
     let productnums = data.join(',');
 
-    window.location.href = '/MoraeTDAT/checkout?gubun=cart&num='+productnums+'&option=none&quantity=none';
+    if(productnums!==''){
+        window.location.href = '/MoraeTDAT/checkout?gubun=cart&num='+productnums+'&option=none&quantity=none';
+    } else {
+        alert('제품을 선택해주세요');
+    }
 }
 
 function gumaeDetail(productnum, option, quantity){

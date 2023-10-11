@@ -1,5 +1,9 @@
+<%@ page import="MoraeTdat.data.Entity.User" %>
+<%@ page import="MoraeTdat.data.Entity.Orders" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+         pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="/css/whole.css">
     <!-- 홈 css -->
     <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <script type="text/javascript" src="/js/mypage.js"></script>
 </head>
 <body>
 <script type="text/javascript">
@@ -94,11 +99,29 @@
             <div class="col-1">
                 <!-- 위치 차지 -->
             </div>
+            <%
+                String userid = (String) session.getAttribute("loginID");
+            %>
             <div class="col-2 mb-4 p-0" id="userInfo">
+                <%
+                    if(userid==null) {
+                %>
                 <div class="mt-4 d-flex justify-content-center">
                     <img src="/img/user.png" alt="userInfo" height="30px" width="30px">
                     <p style="margin-left: 5px;" id="showUserId">비회원</p>
                 </div>
+                <%
+                } else {
+                %>
+                <a href="/MoraeTDAT/mypage?userid=<%=userid%>">
+                    <div class="mt-4 d-flex justify-content-center">
+                        <img src="/img/user.png" alt="userInfo" height="30px" width="30px">
+                        <p style="margin-left: 5px;" id="showUserId">비회원</p>
+                    </div>
+                </a>
+                <%
+                    }
+                %>
                 <div>
                     <div class="d-flex  justify-content-center">
                         <a class="userThing" href="/MoraeTDAT/login" id="login"><p>로그인</p></a>
@@ -113,137 +136,115 @@
             </div>
         </div>
     </div>
-    <!-- 회원가입 폼 -->
     <div id="mypage" class="border rounded-3" style="background-color: #FCFCFC;">
         <div class="mb-3 mt-5">
             <p class="text-center h1">마이페이지</p>
             <div class="d-flex justify-content-center mt-5">
-                <p>계정정보</p>
+                <p onclick="gOn()" style="cursor: pointer;">계정정보</p>
                 <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
-                <p>주문내역</p>
+                <p onclick="jOn()" style="cursor: pointer;">주문내역</p>
             </div>
         </div>
+        <script>
+            function gOn(){
+                $('#userInformation').show();
+                $('#orderHistory').hide();
+            }
+            function jOn(){
+                $('#orderHistory').show();
+                $('#userInformation').hide();
+            }
+        </script>
         <!--개인정보-->
-        <div>
-            <div id="userInformation" style="padding: 20px 200px; display: none">
+        <div id="gaeinjeongbo">
+            <div id="userInformation" style="padding: 20px 200px;">
+                <%
+                    User user = (User) request.getAttribute("user");
+                %>
                 <!-- 아이디 -->
                 <div class="input-group mb-3">
                     <span class="input-group-text" name="id" id="id"><img src="/img/userbk.png" style="width: 25px;"></span>
-                    <input type="text" class="form-control" placeholder="  기존아이디" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" style="background-color: white" aria-label="Username" aria-describedby="basic-addon1" value="<%=user.getUserid()%>" readonly>
                 </div>
                 <!-- 비밀번호 -->
                 <div class="input-group mb-3">
                     <span class="input-group-text" name="pw" id="pw"><img src="/img/lock.png" style="width: 25px;"></span>
-                    <input type="text" class="form-control" placeholder="  ********" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" style="background-color: white" placeholder="  ********" aria-label="Username" aria-describedby="basic-addon1" readonly>
                 </div>
                 <!-- 비밀번호 확인 -->
                 <div class="input-group mb-3">
                     <span class="input-group-text" name="pwCheck" id="pwCheck"><img src="/img/check.png" style="width: 25px;"></span>
                     <input type="text" class="form-control" placeholder="  ********" aria-label="Username" aria-describedby="basic-addon1">
+                    <span class="input-group-text" name="pwCheck" id="pwChange" onclick="changePW()" style="cursor: pointer">비밀번호 변경</span>
                 </div>
                 <!-- 휴대폰번호 -->
                 <div class="input-group mb-3">
-                    <span class="input-group-text" name="phoneNumber" id="phoneNumber"><img src="/img/phone.png" style="width: 25px;"></span>
-                    <input type="text" class="form-control" placeholder="  기존전화번호" aria-label="Username" aria-describedby="basic-addon1">
+                    <span class="input-group-text" id="phoneNumber"><img src="/img/phone.png" style="width: 25px;"></span>
+                    <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" value="<%=user.getUserphone()%>">
+                    <span class="input-group-text" id="phoneChange" onclick="changePhone()" style="cursor: pointer">전화번호 변경</span>
                 </div>
                 <!-- 이메일 -->
                 <div class="input-group mb-3">
-                    <span class="input-group-text" name="email" id="email"><img src="/img/email.png" style="width: 25px;"></span>
-                    <input type="text" class="form-control" placeholder="  기존이메일" aria-label="Username" aria-describedby="basic-addon1">
+                    <span class="input-group-text" id="email"><img src="/img/email.png" style="width: 25px;"></span>
+                    <input type="text" class="form-control" placeholder="  기존이메일" aria-label="Username" aria-describedby="basic-addon1" value="<%=user.getUseremail()%>">
+                    <span class="input-group-text" id="emailChange" onclick="changeEmail()" style="cursor: pointer">이메일 변경</span>
                 </div>
                 <!-- 우편번호 -->
                 <div class="container mb-5" style="padding:0;">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1"><img src="/img/addr.png" style="width: 25px;"></span>
                         <div class="form-control">
-                            <input type="text" name="zonecode" id="zonecode" class="form-control" style="width: 70%; display:inline-block">
+                            <input type="text"  name="zonecode" id="zonecode" class="form-control" style="width: 70%; display:inline-block">
                             <button class="form-control mb-2 zbtn" type="button" onclick="DaumPostcode()" id="button-addon2">우편번호 찾기</button>
                             <input type="text" name="address" id="address" class="form-control mb-2" placeholder="주소">
                             <input type="text" name="detailAddress" id="detailAddress" class="form-control" placeholder="상세주소">
-                        </div>  
+                            <div class="d-flex justify-content-end">
+                                <button class="form-control mb-1 zbtn mt-2 ml-auto" type="button" id="addrChange" style="background-color: #e2e2e2">주소 변경</button>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <input type="hidden" id="ischangePw" value="">
+                <input type="hidden" id="ischangePhone" value="">
+                <input type="hidden" id="ischangeEmail" value="">
+                <div class="d-flex justify-content-center">
+                    <button class="form-control mb-1 zbtn ml-auto" type="button" id="mypageChange" style="background-color: #e2e2e2 " onclick="changeSave()">변경사항 저장</button>
                 </div>
             </div>
-            <!-- 디비에서 최근 3개 조회 (페이징) -->
-            <div id="orderHistory" style="">
+            <!-- 디비에서 최근 3개 조회 -->
+            <%
+                List<Orders> ordersList = (List<Orders>)request.getAttribute("orderlist");
+                List<String> photoList = (List<String>)request.getAttribute("photolist");
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                for(int i=0; i<ordersList.size(); i++){
+                    Orders order = ordersList.get(i);
+                    String photo = photoList.get(i);
+                    String date = dateFormat.format(order.getOrderdate());
+            %>
+            <div id="orderHistory">
                 <div style="margin: 0 80px;" class="mt-5 mb-5">
                     <div class="border py-3" style="background-color: white;">
-                        <p style="margin-left: 15px;" class="mb-2">주문번호 21414&nbsp;&nbsp;&nbsp;주문날짜 2023-09-17</p>
+                        <p style="margin-left: 15px;" class="mb-2">주문번호 <%=order.getOrdernum()%>&nbsp;&nbsp;&nbsp;주문날짜 <%=date%></p>
                         <div class="d-flex mt-3">
-                            <input type="checkbox" name="historyCheck" id="historyCheck" style="margin: 0 30px;">
-                            <img src="/img/sale_item.png" alt="product_img" style="width: 180px;">
-                            <div class="border d-flex" style="margin-left: 30px; width: 720px;">
-                                <p>제품명</p>
-                                <p>수량,옵션</p>
-                                <p>가격</p>
+                            <img src="<%=photo%>" alt="product_img" style="width: 180px; margin-left: 30px">
+                            <div class="border p-3" style="margin-left: 30px; width: 720px;">
+                                <p class="fs-5"><%=order.getProductname()%></p>
+                                <p>&nbsp;수량 : <%=order.getAmount()%> &nbsp;&nbsp;|&nbsp;&nbsp;옵션 : <%=order.getProductoption()%></p>
+                                <p class="fw-bold">&nbsp;<%=order.getProductprice()%>원</p>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-center mt-2">
-                            <p style="margin-top: 20px; margin-bottom: 5px;">더보기</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- 한개만 일단 코드 -->
-                <div style="margin: 0 80px;" class="mt-5 mb-5">
-                    <div class="border py-3" style="background-color: white;">
-                        <p style="margin-left: 15px;" class="mb-2">주문번호 21414&nbsp;&nbsp;&nbsp;주문날짜 2023-09-17</p>
-                        <div class="d-flex mt-3">
-                            <input type="checkbox" name="historyCheck" id="historyCheck" style="margin: 0 30px;">
-                            <img src="/img/sale_item.png" alt="product_img" style="width: 180px;">
-                            <div class="border d-flex" style="margin-left: 30px; width: 720px;">
-                                <p>제품명</p>
-                                <p>수량,옵션</p>
-                                <p>가격</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center mt-2">
-                            <p style="margin-top: 20px; margin-bottom: 5px;">더보기</p>
-                        </div>
-                    </div>
-                </div>            
-                <div  style="margin: 0 80px;" class="mt-5 mb-5">
-                    <div class="border py-3" style="background-color: white;">
-                        <p style="margin-left: 15px;" class="mb-2">주문번호 21414&nbsp;&nbsp;&nbsp;주문날짜 2023-09-17</p>
-                        <div class="d-flex mt-3">
-                            <input type="checkbox" name="historyCheck" id="historyCheck" style="margin: 0 30px;">
-                            <img src="/img/sale_item.png" alt="product_img" style="width: 180px;">
-                            <div class="border d-flex" style="margin-left: 30px; width: 720px;">
-                                <p>제품명</p>
-                                <p>수량,옵션</p>
-                                <p>가격</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center mt-2">
-                            <p style="margin-top: 20px; margin-bottom: 5px;">더보기</p>
                         </div>
                     </div>
                 </div>
             </div>
+            <%
+                }
+            %>
         </div>
-        <!-- 페이지네이션 -->
-        <div id="pagination" class="justify-content-center d-flex mb-3">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                </ul>
-            </nav>
-        </div>
-    </div>    
-    
+    </div>
     <!-- Footer -->
-    <div class="footer" style="position: absolute; top : 1650px; left :335px;">
+    <div class="footer" id="footer" style="position: absolute; top : 1650px; left :335px;">
         <hr>
         <div class="container d-flex align-items-center mt-5">
             <div class="col">
@@ -270,22 +271,22 @@
         </div>
         <div class="mb-5"></div>
     </div>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script>
-        function DaumPostcode() {
-            let addr = '';
-            let zonecode = '';
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function DaumPostcode() {
+        let addr = '';
+        let zonecode = '';
 
-            new daum.Postcode({
-                oncomplete : function(data) {
-                    addr = data.address;
-                    zonecode = data.zonecode;
-                    $('#address').val(addr);
-                    $('#zonecode').val(zonecode);
-                    $('#detailAddress').focus();
-                }
-            }).open();
-        }
-    </script>
+        new daum.Postcode({
+            oncomplete : function(data) {
+                addr = data.address;
+                zonecode = data.zonecode;
+                $('#address').val(addr);
+                $('#userzcode').val(zonecode);
+                $('#detailAddress').focus();
+            }
+        }).open();
+    }
+</script>
 </body>
 </html>l>

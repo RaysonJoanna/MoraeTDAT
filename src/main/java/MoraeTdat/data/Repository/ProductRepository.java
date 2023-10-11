@@ -44,8 +44,8 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query(value="SELECT * FROM product WHERE productname LIKE %?1% order by regidate desc LIMIT 9 ", nativeQuery = true)
     List<Product> searchByKeywordN(String keyword);
 
-    @Query(value = "select count(*) from cart where productnum =?", nativeQuery = true)
-    int isExistsProduct(int productnum);
+    @Query(value = "select count(*) from cart where productnum =? and userid=?", nativeQuery = true)
+    int isExistsProduct(int productnum, String userid);
 
     @Transactional
     @Modifying

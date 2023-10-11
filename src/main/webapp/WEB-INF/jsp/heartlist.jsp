@@ -145,7 +145,7 @@
                             <img src="<%=heart.getMainphoto()%>" alt="product_img" style="width: 180px;">
                             <div class="border p-4 mx-auto" style="margin-left: 30px; width: 720px;">
                                 <p class="h3 fw-bold"><%=heart.getProductname()%></p>
-                                <p class="h5 ms-2"><%=heart.getProductprice()%></p>
+                                <p class="h5 ms-2"><%=heart.getProductprice()%>원</p>
                             </div>
                         </div>
                         <!-- 상품 하나 끝 -->
@@ -161,13 +161,20 @@
                                 delivery_fee = 3000;
                             }
                         %>
-                        <div class="border py-5 mt-5 d-flex m-5" style="background-color: white;">
-                            <p class="fs-2 fw-bold my-auto" style="margin-left: 60px;">전체 금액</p>
-                            <p class="fs-4 my-auto" style="margin-left: 60px;"><%=total_price%></p>
-                            <p class="fs-4 my-auto" style="margin-left: 40px;">&nbsp;+&nbsp;</p>
-                            <p class="fs-4 my-auto" style="margin-left: 40px;"><%=delivery_fee%></p>
-                            <p class="fs-2 fw-bold my-auto" style="margin-left: 120px;"><%=total_price + delivery_fee%>원</p>
+                        <div>
+                            <p class="h6 mt-5 ms-5" style="color: gray">* 5 만원 이상 구매시 무료배송</p>
+                            <div class="border py-5 mb-5 ms-5 me-5 d-flex" style="background-color: white;">
+                                <p class="fs-2 fw-bold my-auto" style="margin-left: 60px;">전체 금액</p>
+                                <p class="fs-4 my-auto" style="margin-left: 60px;"><%=total_price%></p>
+                                <p class="fs-4 my-auto" style="margin-left: 40px;">&nbsp;+&nbsp;</p>
+                                <div class="d-flex">
+                                    <p class="fs-4 my-auto" style="margin-left: 40px;"><%=delivery_fee%></p>
+                                    <p class="fs-6 my-auto">(배송비)</p>
+                                </div>
+                                <p class="fs-2 fw-bold my-auto" style="margin-left: 80px;">=&nbsp;&nbsp;&nbsp;<%=total_price + delivery_fee%>원</p>
+                            </div>
                         </div>
+                    </div>
                     <!-- 금액 표시창 끝 -->
 
                     <!-- 구매버튼 -->

@@ -27,4 +27,7 @@ public interface CartRepository extends JpaRepository<Cart,Integer> {
     @Query(value="SELECT * from cart where productnum=? and userid=?", nativeQuery = true)
     Cart getCartListBynums(int productnum, String userid);
 
+    @Query(value ="SELECT * from cart where productnum=?", nativeQuery = true)
+    Cart getCartBynum(int productnum);
+
 }

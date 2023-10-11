@@ -60,8 +60,8 @@ public class ShopService {
         return productRepository.searchByKeywordN(keyword);
     }
 
-    public int isExistsProduct(int productnum){
-        return productRepository.isExistsProduct(productnum);
+    public int isExistsProduct(int productnum, String userid){
+        return productRepository.isExistsProduct(productnum,userid);
     }
 
     public void updateAmount(int amount, String productoption, int productnum){
@@ -81,5 +81,8 @@ public class ShopService {
     public List<Product> orderHitList(String category){return productRepository.orderHitList(category);}
 
     public List<Product> orderLowpriceList(String category){return productRepository.orderLowpriceList(category);}
+
+
+
 
 }

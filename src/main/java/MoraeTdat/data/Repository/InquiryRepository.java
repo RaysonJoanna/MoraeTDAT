@@ -22,4 +22,17 @@ public interface InquiryRepository extends JpaRepository<Inquiry,Integer> {
 
     @Query(value="SELECT * from inquiry where inquirynum=?", nativeQuery = true)
     Inquiry getInquiry(String inquirynum);
+
+    @Query(value = "SELECT * from inquiry order by regidate desc", nativeQuery = true)
+    List<Inquiry> getAllInquiry();
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE from inquiry where inquirynum=?", nativeQuery = true)
+    void deleteByInquirynum(int inquirynum);
+
+    @Transactional
+    @Modifying
+    @Query(value="update inquiry set answercontent=? where inquirynum=?", nativeQuery = true)
+    void addReply(String answercontent, int inquirynum);
 }
