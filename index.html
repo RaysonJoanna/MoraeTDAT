@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 부트스트랩5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- 폰트어썸 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <!-- 구글폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+    <!-- JQ -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+
+    <title>모래모레</title>
+    <style>
+        *{ 
+            margin:0; font-family: 'Noto Sans KR', sans-serif;
+        }
+        #maintop,#login, #mypage, #category,#cart
+        ,#heart,#purchase,#register,#inquiry,#notice,#ContactUs,#About,
+        #adminlogin,#adminhome,#admininquiry,#adminnotice{
+            cursor: pointer;
+        }
+
+        img {
+            display: block;
+        }
+
+        hr {
+            margin: 50px 0;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="d-flex justify-content-center mb-5">
+        <img src="img/MoraeTDAT.png" alt="meRecipe" style="width:80%; max-width: 1600px;">
+    </div>
+    <div class="p-4 justify-content-center " style="margin-top: 100px; text-align: center;">
+        <h1 class="mt-5 pt-5" style="border-top: 2px solid #5D6DBE;">프로젝트 소개</h1>
+        <div style="border-bottom: 2px solid #5D6DBE;" class="pb-3">
+            <p class="mt-5 fs-5">기간 : 2023.09.26~</p>
+            <p class="fs-5">목적 : 고양이 '모래' 굿즈 판매 사이트</p>
+            <p class="fs-5">사용툴 : IntelliJ, MySQL, VScode, github </p>
+            <p class="fs-5">개발 인원 : 1명</p>
+        </div>
+        
+        <div class="d-flex justify-content-center mb-5 mt-5">
+            <img src="img/main.png" alt="meRecipe" style="width:80%; max-width: 1600px;">
+        </div>
+        <div class="mb-5 text-center" style="margin-top: 150px;">
+            <h1 class="mb-5"> 모래모레 설계</h1>
+            <img src="img/MoraeTDAT_diagram.PNG" alt="mos_diagram" class="mx-auto">
+            <img src="img/MoraeTDAT_diagram_admin.PNG" alt="mos_diagram" class="mx-auto mt-5">
+            <p class="fs-6 mt-2" style="color:#5D6DBE">관리자 기능은 현재 공지사항까지 구현되어 있음</p>
+        </div>
+        <div>
+            <!-- 메인화면 -->
+            <p class="h1 mb-5 pt-5">모래모레 - 사용자</p>
+            <p class="h4 text-center mb-3" id="maintop" onClick="here(event)">메인화면<i class="fas fa-mouse-pointer" id="m1click" style="margin-left: 10px;"></i></p>
+            <div id="maintop2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <img src="img/main-1.png" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 클릭시 메인화면으로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 클릭시 로그인, 회원가입으로 이동. 로그인시 계정이름 클릭시 마이페이지 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">3. 클릭시 장바구니, 찜 목록으로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">4. 홍보 캐러셀 클릭시 해당 메뉴로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">5. 클릭시 카테고리별 상품 목록으로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">6. 클릭시 문의사항 목록으로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">7. 클릭시 공지사항 목록으로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">8. 클릭시 ContactUs 메뉴로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">9. 클릭시 About모래 메뉴로 이동</h5>
+                        </div>                    
+                    </div>
+                    <hr> 
+                    <img src="img/main-2.png" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center mb-5">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 박스메뉴 클릭시 해당 메뉴로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 모래 설명페이지로 이동</h5>
+                        </div>    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mb-5" id="maintopclose" onClick="jeob(event)">접기</button>
+            </div>
+            <!-- 로그인 -->
+            <p class="h4 text-center mb-3" id="login" onClick="here(event)">로그인<i class="fas fa-mouse-pointer" id="loginclick" style="margin-left: 10px;"></i></p>
+            <div id="login2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <img src="img/login.png" alt="r1" class="mt-5 mx-auto">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 아이디 입력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 비밀번호 입력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">3. 클릭시 아이디 쿠키에 30일간 저장</h5>
+                            <h5 class="mt-3 text-start" style="color:black">4. 클릭시 로그인 검증 </h5>
+                            <h5 class="mt-3 text-start" style="color:black">5. 클릭시 회원가입 메뉴로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">6. 클릭시 아이디 찾기 팝업</h5>
+                            <h5 class="mt-3 text-start" style="color:black">7. 클릭시 비밀번호 찾기 팝업</h5>
+                        </div>                    
+                    </div>
+                    <hr> 
+                    <h5 class="mt-5 text-center mx-auto" style="color:green">아이디 찾기</h5>
+                    <img src="img/findid.PNG" alt="r1" class="mt-5 mx-auto">
+                    <div class="d-flex justify-content-center mb-5">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 이메일을 입력받고</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 전화번호를 입력받아 같은 유저를 찾아 검증</h5>
+                        </div>    
+                    </div>
+                    <hr> 
+                    <h5 class="mt-5 text-center mx-autot" style="color:green">비밀번호 찾기</h5>
+                    <img src="img/findpw.PNG" alt="r1" class="mt-5 mx-auto">
+                    <div class="d-flex justify-content-center mb-5">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 아이디를 입력받고</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 전화번호를 입력받고</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 인증번호를 받은 후 같은 유저를 찾아 검증</h5>
+                        </div>     
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mb-5" id="loginclose" onClick="jeob(event)">접기</button>
+            </div>
+            <!-- 회원가입 -->
+            <p class="h4 text-center mb-3" id="register" onClick="here(event)">회원가입<i class="fas fa-mouse-pointer" id="registerclick" style="margin-left: 10px;"></i></p>
+            <div id="register2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <img src="img/register.png" alt="r1" class="mt-5 mx-auto">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 아이디 입력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. ajax로 기존 아이디와 중복 검사</h5>
+                            <h5 class="mt-3 text-start" style="color:black">3. 비밀번호 입력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">4. 비밀번호 입력칸과 같아야 가입 가능</h5>
+                            <h5 class="mt-3 text-start" style="color:black">5. 전화번호 입력 </h5>
+                            <h5 class="mt-3 text-start" style="color:black">6. 이메일 입력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">7. 카카오 주소 찾기 api로 주소 입력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">8. 약관 동의 모두 체크 시 회원가입</h5>
+                        </div>                    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mt-5 mb-5" id="registerclose" onClick="jeob(event)">접기</button>
+            </div>
+            <!-- 마이페이지 -->
+            <p class="h4 text-center mb-3" id="mypage" onClick="here(event)">마이페이지<i class="fas fa-mouse-pointer" id="mypageclick" style="margin-left: 10px;"></i></p>
+            <div id="mypage2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <img src="img/mypage-user.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 기본으로 계정정보 출력. 클릭시 해당 메뉴</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 버튼 클릭시 변경 팝업창</h5>
+                            <h5 class="mt-3 text-start" style="color:black">3. 버튼 클릭시 변경 팝업창</h5>
+                            <h5 class="mt-3 text-start" style="color:black">4. 버튼 클릭시 변경 팝업창</h5>
+                            <h5 class="mt-3 text-start" style="color:black">5. 버튼 클릭시 변경 팝업창</h5>
+                            <h5 class="mt-3 text-start" style="color:black">6. 변경 사항들을 저장</h5>
+                        </div>                    
+                    </div>
+                    <hr> 
+                    <img src="img/mypage-order.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center mb-5">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 클릭시 상세 주문내역 출력(현재 미구현)</h5>
+                        </div>    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mb-5" id="mypageclose" onClick="jeob(event)">접기</button>
+            </div>
+            <!--상품-->
+            <p class="h4 text-center mb-3 mt-5" id="category" onClick="here(event)">상품<i class="fas fa-mouse-pointer" id="categoryclick" style="margin-left: 10px;"></i></p>
+            <div id="category2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <h5 class="mt-5 text-center mx-autot" style="color:green">상품목록</h5>
+                    <img src="img/shop.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 카테고리별 상품목록에서 입력받은 검색어를 통해 목록 출력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 선택한 순서에 따른 정렬된 목록 출력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">3. 상품 클릭시 상품 상세화면으로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">4. 카트 버튼 클릭 시 장바구니에 저장</h5>
+                            <h5 class="mt-3 text-start" style="color:black">5. 하트 버튼 클릭 시 찜 목록에 저장</h5>
+                        </div>                    
+                    </div>
+                    <hr> 
+                    <img src="img/shopdetail.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center mb-5">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 수량 조절 버튼</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 클릭시 찜 목록에 저장</h5>
+                            <h5 class="mt-3 text-start" style="color:black">3. 클릭시 장바구니에 저장</h5>
+                            <h5 class="mt-3 text-start" style="color:black">4. 클릭시 구매 화면으로 이동</h5>
+                        </div>    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mb-5" id="categoryclose" onClick="jeob(event)">접기</button>
+            </div>
+            <!-- 장바구니 -->
+            <p class="h4 text-center mb-3" id="cart" onClick="here(event)">장바구니<i class="fas fa-mouse-pointer" id="cartclick" style="margin-left: 10px;"></i></p>
+            <div id="cart2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <img src="img/cart.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 해당 메뉴 클릭시 선택/삭제</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 버튼 클릭시 구매 화면으로 이동</h5>
+                        </div>                    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mt-5 mb-5" id="cartclose" onClick="jeob(event)">접기</button>
+            </div>
+            <!-- 찜목록 -->
+            <p class="h4 text-center mb-3" id="heart" onClick="here(event)">찜목록<i class="fas fa-mouse-pointer" id="heartclick" style="margin-left: 10px;"></i></p>
+            <div id="heart2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <img src="img/heart.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 해당 메뉴 클릭시 선택/삭제</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 버튼 클릭시 장바구니에 저장</h5>
+                        </div>                    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mb-5" id="heartclose" onClick="jeob(event)">접기</button>
+            </div>  
+            <!-- 구매하기 -->
+            <p class="h4 text-center mb-3" id="purchase" onClick="here(event)">구매하기<i class="fas fa-mouse-pointer" id="purchaseclick" style="margin-left: 10px;"></i></p>
+            <div id="purchase2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <img src="img/order.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 계정정보 불러오기 클릭 시 ajax로 데이터를 가져와 입력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 주문자 정보와 동일 클릭 시 주문자 정보 가져와 입력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">3. 장바구니에서 구매 시 장바구니 테이블에서, 상품 상세페이지에서 구매 시 해당 데이터를 가져와 출력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">4. 클릭시 주문 테이블에 저장. 장바구니에서 구매시 장바구니 데이터 삭제</h5>
+                        </div>                    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mb-5" id="purchaseclose" onClick="jeob(event)">접기</button>
+            </div> 
+            <!-- 문의사항 -->
+            <p class="h4 text-center mb-3 mt-5" id="inquiry" onClick="here(event)">문의사항<i class="fas fa-mouse-pointer" id="inquiryclick" style="margin-left: 10px;"></i></p>
+            <div id="inquiry2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <h5 class="mt-5 text-center mx-autot" style="color:green">문의사항 목록</h5>
+                    <img src="img/inquiry.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 클릭시 해당 문의사항 글 화면으로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 클릭시 문의사항 작성 화면으로 이동</h5>
+                        </div>                    
+                    </div>
+                    <hr>
+                    <h5 class="mt-5 text-center mx-autot" style="color:green">문의사항 작성</h5>
+                    <img src="img/inquiryWrite.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 제목과 내용 입력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 클릭시 문의사항 저장</h5>
+                        </div>                    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mt-5 mb-5" id="inquiryclose" onClick="jeob(event)">접기</button>
+            </div>
+            <!-- 공지사항 -->
+            <p class="h4 text-center mb-3" id="notice" onClick="here(event)">공지사항<i class="fas fa-mouse-pointer" id="noticeclick" style="margin-left: 10px;"></i></p>
+            <div id="notice2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <h5 class="mt-5 text-center mx-autot" style="color:green">공지사항 목록</h5>
+                    <img src="img/notice.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 클릭시 공지사항 내용으로 화면 이동</h5>
+                        </div>                    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mt-5 mb-5" id="noticeclose" onClick="jeob(event)">접기</button>
+            </div>
+            <!-- ContactUs -->
+            <p class="h4 text-center mb-3 mt-5" id="ContactUs" onClick="here(event)">ContactUs<i class="fas fa-mouse-pointer" id="ContactUsclick" style="margin-left: 10px;"></i></p>
+            <div id="ContactUs2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <img src="img/contactus.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 카카오맵 api로 위치 출력</h5>
+                        </div>                    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mb-5 mt-5" id="ContactUsclose" onClick="jeob(event)">접기</button>
+            </div>
+            <!-- About모래 -->
+            <p class="h4 text-center mb-3" id="About" onClick="here(event)">About모래<i class="fas fa-mouse-pointer" id="Aboutclick" style="margin-left: 10px;"></i></p>
+            <div id="About2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <img src="img/aboutMorae.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">고양이 모래 소개</h5>
+                        </div>                    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mb-5 mt-5" id="Aboutclose" onClick="jeob(event)">접기</button>
+            </div>  
+            <p class="h1 mt-5 mb-5 pt-5">모래모레 - 관리자</p>    
+            <!-- 관리자 로그인 -->
+            <p class="h4 text-center mb-3" id="adminlogin" onClick="here(event)">관리자 로그인<i class="fas fa-mouse-pointer" id="adminloginclick" style="margin-left: 10px;"></i></p>
+            <div id="adminlogin2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <img src="img/adminlogin.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 아이디 입력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 비밀번호 입력</h5>
+                            <h5 class="mt-3 text-start" style="color:black">3. 버튼 클릭 시 관리자 검증 후 관리자 홈으로 이동</h5>
+                        </div>                    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mb-5 mt-5" id="adminloginclose" onClick="jeob(event)">접기</button>
+            </div>  
+            <!-- 관리자 홈 -->
+            <p class="h4 text-center mb-3" id="adminhome" onClick="here(event)">관리자 홈<i class="fas fa-mouse-pointer" id="adminhomeclick" style="margin-left: 10px;"></i></p>
+            <div id="adminhome2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <img src="img/adminhome.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 관리자 문의사항 화면으로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 관리자 공지사항 화면으로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">(미구현)</h5>
+                        </div>                    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mb-5 mt-5" id="adminhomeclose" onClick="jeob(event)">접기</button>
+            </div>                  
+            <!-- 관리자 문의사항 -->
+            <p class="h4 text-center mb-3" id="admininquiry" onClick="here(event)">관리자 문의사항<i class="fas fa-mouse-pointer" id="admininquiryclick" style="margin-left: 10px;"></i></p>
+            <div id="admininquiry2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <img src="img/admininquiry.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 버튼 클릭 시 해당 문의사항 삭제</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 문의사항 답변 작성 및 수정</h5>
+                            <h5 class="mt-3 text-start" style="color:black">3. 버튼 클릭 시 답변 테이블에 저장</h5>
+                        </div>                    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mb-5 mt-5" id="admininquiryclose" onClick="jeob(event)">접기</button>
+            </div>         
+            <!-- 관리자 공지사항 -->
+            <p class="h4 text-center mb-3" id="adminnotice" onClick="here(event)">관리자 공지사항<i class="fas fa-mouse-pointer" id="adminnoticeclick" style="margin-left: 10px;"></i></p>
+            <div id="adminnotice2" style="display: none;">
+                <div style="width:900px; margin: auto auto;">
+                    <h5 class="mt-5 text-center mx-autot" style="color:green">공지사항 목록</h5>
+                    <img src="img/adminnotice.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 제목 클릭 시 공지사항 내용 출력 화면으로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 버튼 클릭 시 공지사항 작성 화면으로 이동</h5>
+                        </div>                    
+                    </div>
+                    <hr>
+                    <h5 class="mt-5 text-center mx-autot" style="color:green">공지사항 내용</h5>
+                    <img src="img/adminnoticeUD.PNG" alt="r1" class="mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h5 class="mt-5 text-start" style="color:black">1. 버튼 클릭 시 공지사항 수정 화면으로 이동</h5>
+                            <h5 class="mt-3 text-start" style="color:black">2. 버튼 클릭 시 해당 공지사항 삭제</h5>
+                        </div>                    
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary mb-5 mt-5" id="adminnoticeclose" onClick="jeob(event)">접기</button>
+            </div>    
+        </div>
+        <div>
+            <a href="https://github.com/RaysonJoanna/MoraeTDAT" class="d-flex justify-content-center mt-5"><img src="img/MoraeTDATCode.png" alt="보러가기" style="width:40%; max-width: 800px;"></a>
+        </div>
+    </div>
+    <script>
+        function here(e) {
+            let id = e.target.id;
+            let div = $(`#${id}`).next()[0].id;
+            let pointer = $(`#${id}`).children().first()[0].id;
+
+            if($(`#${div}`).css('display') == 'none') {
+                $(`#${div}`).show();
+                $(`#${pointer}`).css("color","#c7c7c7");
+            } else {
+                $(`#${div}`).hide();
+                $(`#${pointer}`).css("color","#1E3050");
+            }
+        }
+
+        function jeob(e){
+            let self = e.target.id;
+            let mother = $(`#${self}`).parent()[0].id;
+            let aunt = $(`#${mother}`).prev()[0].id;
+            
+            $(`#${self}`).parent().css('display','none');
+            $(`#${aunt}`).children().css("color","#1E3050");
+        }
+    </script>
+</body>
+</html>
